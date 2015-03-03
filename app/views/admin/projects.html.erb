@@ -8,7 +8,7 @@
 <%= form_tag({}, :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 <label for='inactivFor'> Inaktiv seit: </label>
-<%= select_tag 'inactivFor', project_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
+<%= select_tag 'inactivFor', raw('<option>0</option>,<option>3</option>,<option>6</option>,<option>9</option>,<option>12</option>'), :class => "small", :onchange => "this.form.submit(); return false;"  %>
 <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
 <%= link_to l(:button_clear), {:controller => 'admin', :action => 'projects'}, :class => 'icon icon-reload' %>
 </fieldset>
