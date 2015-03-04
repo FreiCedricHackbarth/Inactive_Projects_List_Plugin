@@ -1,23 +1,23 @@
 module AdminHelper2Helper
   
-  def inactiveprojects()   
+  def index  
+	Rails.logger.info "AdminHelper2Helper - index is called. Log for Frei"
+  end
   
-	Rails.logger.info "AdminHelper2Helper is called. Log for Frei"
+  def self.include(base)
+    base.send.(:include, InstanceMethods)
+  end
+  
+  module InstanceMethods
+	def inactiveprojects
+	  Rails.logger.info "inactiveprojects InstanceMethods is called. Log for Frei"
 	
+	  unless self.deliverable.nil?
+        return self.deliverable.subject
+      end
+	end
   end
   
-  def projects
-	Rails.logger.info "AdminInactiveProjectsController - projects is called. Log for Frei"
-  
-    @status = params[:status] || 1
-
-    scope = Project.status(@status).sorted
-    scope = scope.like(params[:name]) if params[:name].present?
-    @projects = scope.to_a
-
-    render :action => "projects", :layout => false if request.xhr?
-  end
-
 end
 
 Rails.logger.info "AdminHelper2Helper is called. Log for Frei"
