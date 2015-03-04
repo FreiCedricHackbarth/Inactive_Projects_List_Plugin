@@ -6,7 +6,7 @@ Redmine::Plugin.register :inactive_projects_list_plugin do
   version '0.0.1'
   url 'https://github.com/FreiCedricHackbarth/Inactive_Projects_List_Plugin.git'
   author_url 'https://github.com/FreiCedricHackbarth'
-  menu :admin_menu, :AdminInactiveProjectsController, {}, :caption => 'Inactive Projects'
+  menu :admin_menu, :InactiveProjects, {:controller => 'admin', :action => 'projects'}, :caption => 'Inactive Projects'
 end
 
 require_dependency 'WorkflowHelper2_helper'
