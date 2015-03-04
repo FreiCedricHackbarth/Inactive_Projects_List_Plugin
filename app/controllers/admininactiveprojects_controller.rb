@@ -19,7 +19,7 @@
 ### Frei-Cedric Hackbarth ###
 #############################
 
-class AdminInactiveProjectsController < ApplicationController
+class AdmininactiveprojectsController < ApplicationController
   layout 'admin'
   menu_item :projects, :only => :projects
   menu_item :plugins, :only => :plugins
@@ -36,6 +36,8 @@ class AdminInactiveProjectsController < ApplicationController
   end
 
   def projects
+	Rails.logger.info "AdminInactiveProjectsController - projects is called. Log for Frei"
+  
     @status = params[:status] || 1
 
     scope = Project.status(@status).sorted

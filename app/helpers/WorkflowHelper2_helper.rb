@@ -25,5 +25,6 @@ module WorkflowHelper2Helper
 
 end
 
+Rails.logger.info "WorkflowHelper is called. Log for Frei"
 require 'workflows_helper'
 WorkflowsHelper.send :include, WorkflowHelper2Helper

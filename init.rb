@@ -10,4 +10,4 @@ Redmine::Plugin.register :inactive_projects_list_plugin do
 end
 
 require_dependency 'WorkflowHelper2_helper'
-#require_dependency 'AdminInactiveProjectsController'
+require_dependency 'AdminHelper2_helper'
