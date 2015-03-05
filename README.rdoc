@@ -1,12 +1,9 @@
-= Redmine Logs Plugin
+### Redmine Inactive Projects List Plugin
+This is a plugin for Redmine which provides a list of all projects, which are inactive for a specific timespan.
 
-This is a plugin for Redmine which lets you download log files of Redmine from administration page.
+https://github.com/FreiCedricHackbarth/Inactive_Projects_List_Plugin.git
 
-http://www.r-labs.org/projects/logs
-
-=== Plugin installation
-
+### Plugin installation
 1. Copy the plugin directory into the plugins directory.
-
-That's all.
+2. Restart redmine.
 
