@@ -1,4 +1,7 @@
 #Encoding: UTF-8
+require 'redmine'
+require 'admin_menu_hooks'
+
 Redmine::Plugin.register :inactive_projects_list_plugin do
   name 'Inactive Projects List Plugin'
   author 'Frei-Cedric Hackbarth'
@@ -6,8 +9,7 @@ Redmine::Plugin.register :inactive_projects_list_plugin do
   version '0.0.1'
   url 'https://github.com/FreiCedricHackbarth/Inactive_Projects_List_Plugin.git'
   author_url 'https://github.com/FreiCedricHackbarth'
-  menu :admin_menu, :InactiveProjects, {:controller => 'admin', :action => 'projects'}, :caption => 'Inactive Projects'
+  requires_redmine :version_or_higher => '3.0.0'
+  
+  menu :admin_menu, :inactive_projects_list, { :controller => 'logs', :action => 'index'}, :caption => :LabelInactiveProjects
 end
-
-require_dependency 'WorkflowHelper2_helper'
-require_dependency 'AdminHelper2_helper'

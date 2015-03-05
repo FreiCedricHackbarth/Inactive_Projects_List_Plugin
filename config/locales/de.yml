@@ -1,6 +1,4 @@
 # German strings go here for Rails i18n
 de:
-  #my_label: "My label deutsch"
-  headlineForWorkflowGraph: "Workflow Grafik"
-  infolineForWorkflowGraph: "Die Grafik zeigt nur den allgemeinen Fall ohne die zusätzlichen Berechtigungen an."
-  infoIfSeveralItemsSelected: "Für die Grafik darf nur eine Rolle und ein Tracker ausgewählt sein."
+  #my_label: "My label in german"
+  LabelInactiveProjects: "Inaktive Projekte"
