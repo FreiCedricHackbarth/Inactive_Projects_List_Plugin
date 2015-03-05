@@ -2,3 +2,4 @@
 de:
   #my_label: "My label in german"
   LabelInactiveProjects: "Inaktive Projekte"
+  LabelInactivFor: "inaktiv seit"
