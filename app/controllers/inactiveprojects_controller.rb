@@ -1,4 +1,5 @@
 class InactiveprojectsController < ApplicationController
+  layout 'admin'
 
   def index
     
