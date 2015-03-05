@@ -24,7 +24,7 @@
   <th></th>
   </tr></thead>
   <tbody>
-<% project_tree(@projects) do |project, level| %>
+<% project_tree(@inactivprojects) do |project, level| %>
   <tr class="<%= cycle("odd", "even") %> <%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
   <td class="name"><span><%= link_to_project_settings(project, {}, :title => project.short_description) %></span></td>
   <td><%= format_date(project.created_on) %></td>

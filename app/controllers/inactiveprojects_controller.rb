@@ -18,7 +18,7 @@ class InactiveprojectsController < ApplicationController
 
     scope = Project.sorted
     scope = scope.like(params[:name]) if params[:name].present?
-    @projects = scope.to_a
+    @inactivprojects = scope.to_a
 
     render :action => "projects", :layout => false if request.xhr?
 	
