@@ -11,25 +11,20 @@ class InactiveprojectsController < ApplicationController
   def index
 	Rails.logger.info "The function index of InactiveprojectsController was called. Info for Frei"
 		
-	@status = params[:status] || 1
+	#@status = params[:status] || 1
+	#Status 1 Active
+	#Status 5 Closed
+	#Status 9 Archived
 
-    scope = Project.status(@status).sorted
+    scope = Project.sorted
     scope = scope.like(params[:name]) if params[:name].present?
+	#scope = scope.like('03.03.2015')
     @projects = scope.to_a
 
     render :action => "projects", :layout => false if request.xhr?
 	
-	
-	
-    #scope = Project
-    #scope = scope.like(params[:name]) if params[:name].present?
-    #@projects = scope
-	
-	#Rails.logger.info "scope is: #{scope}"
+	Rails.logger.info "status is: #{@status}"
+	Rails.logger.info "scope is: #{scope}"
 	Rails.logger.info "projects is: #{@projects}"
-
-    #render :action => "projects", :layout => false if request.xhr?
-	
   end
-
 end
