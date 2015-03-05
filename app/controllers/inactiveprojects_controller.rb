@@ -18,7 +18,6 @@ class InactiveprojectsController < ApplicationController
 
     scope = Project.sorted
     scope = scope.like(params[:name]) if params[:name].present?
-	#scope = scope.like('03.03.2015')
     @projects = scope.to_a
 
     render :action => "projects", :layout => false if request.xhr?
