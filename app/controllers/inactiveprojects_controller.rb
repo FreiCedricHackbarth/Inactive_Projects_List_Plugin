@@ -1,4 +1,3 @@
-
 require 'log_file'
 class InactiveprojectsController < ApplicationController
   unloadable

@@ -11,5 +11,5 @@ Redmine::Plugin.register :inactive_projects_list_plugin do
   author_url 'https://github.com/FreiCedricHackbarth'
   requires_redmine :version_or_higher => '3.0.0'
   
-  menu :admin_menu, :inactive_projects_list, { :controller => 'logs', :action => 'index'}, :caption => :LabelInactiveProjects
+  menu :admin_menu, :inactive_projects_list, { :controller => 'inactiveprojects', :action => 'index'}, :caption => :LabelInactiveProjects
 end

@@ -1,6 +1,0 @@
-#redmine_log_show {
-    overflow: auto;
-    height: 600px;
-}
-
-#admin-menu a.inactive_projects_list { background-image: url(../images/InactiveProjectsIcon.png); }
