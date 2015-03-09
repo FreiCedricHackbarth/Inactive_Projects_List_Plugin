@@ -25,6 +25,8 @@ class InactiveprojectsController < ApplicationController
 	Rails.logger.info "scope is: #{scope}"
 	Rails.logger.info "projects is: #{@inactivprojects}"
 	
+	Rails.logger.info "Es sind #{@inactivprojects.length} Elemente im Array Projekte."
+	
 	############## Events
 	
 	@activity = Redmine::Activity::Fetcher.new(User.current, :project => @project,
@@ -35,17 +37,18 @@ class InactiveprojectsController < ApplicationController
 	
 	Rails.logger.info "Activity is: #{@activity}"
 	
-	#@activity.scope_select {|t| !params["show_#{t}"].nil?}
-	#@activity.scope.include?(time_entries)
-	
-	
-    #@activity.scope = (@author.nil? ? :default : :all) if @activity.scope.empty?
-
-    events = @activity.events(Date.today - 2, Date.today + 1)
+    events = @activity.events(Date.today - 20, Date.today + 1)
 	
 	Rails.logger.info "Events - Info for Frei - #{events}"
 	
+	Rails.logger.info "Es sind #{events.length} Elemente im Array Events."
 	
+	events.each do |item|
+		Rails.logger.info "Akitivtaet Nr #{item.project_id}"
+		@inactivprojects = @inactivprojects.delete_if{|obj|obj.id == item.project_id}
+	end
+	
+	Rails.logger.info "Es sind #{@inactivprojects.length} Elemente im Array Projekte."
 	
   end
 end
