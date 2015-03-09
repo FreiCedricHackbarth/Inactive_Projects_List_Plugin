@@ -7,10 +7,19 @@ class InactiveprojectsController < ApplicationController
   before_filter :require_admin
   helper :sort
   include SortHelper
-  
+    
   def index
 	Rails.logger.info "The function index of InactiveprojectsController was called. Info for Frei"
-		
+	
+	# Get the url parameter inactivFor
+	if params[:inactivFor]
+      begin; @inactivFor = params[:inactivFor]; rescue; end
+	else
+	  @inactivFor = 0;
+    end
+	
+	Rails.logger.info "Inactiv For Variable ist: #{@inactivFor}"
+				
 	# Get all projects
     scope = Project.sorted
     @inactivprojects = scope.to_a
@@ -38,4 +47,5 @@ class InactiveprojectsController < ApplicationController
 	####
     render :action => "projects", :layout => false if request.xhr?	
   end
+  
 end
