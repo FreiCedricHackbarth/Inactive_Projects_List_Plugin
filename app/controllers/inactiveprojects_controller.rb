@@ -17,13 +17,35 @@ class InactiveprojectsController < ApplicationController
 	#Status 9 Archived
 
     scope = Project.sorted
-    scope = scope.like(params[:name]) if params[:name].present?
+    #scope = scope.like(params[:name]) if params[:name].present?
     @inactivprojects = scope.to_a
 
     render :action => "projects", :layout => false if request.xhr?
-	
-	Rails.logger.info "status is: #{@status}"
+
 	Rails.logger.info "scope is: #{scope}"
-	Rails.logger.info "projects is: #{@projects}"
+	Rails.logger.info "projects is: #{@inactivprojects}"
+	
+	############## Events
+	
+	@activity = Redmine::Activity::Fetcher.new(User.current, :project => @project,
+                                                             :with_subprojects => @with_subprojects,
+                                                             :author => @author)
+	
+	Rails.logger.info "Event Abfrage ohne Fehler - Info for Frei"
+	
+	Rails.logger.info "Activity is: #{@activity}"
+	
+	#@activity.scope_select {|t| !params["show_#{t}"].nil?}
+	#@activity.scope.include?(time_entries)
+	
+	
+    #@activity.scope = (@author.nil? ? :default : :all) if @activity.scope.empty?
+
+    events = @activity.events(Date.today - 2, Date.today + 1)
+	
+	Rails.logger.info "Events - Info for Frei - #{events}"
+	
+	
+	
   end
 end
