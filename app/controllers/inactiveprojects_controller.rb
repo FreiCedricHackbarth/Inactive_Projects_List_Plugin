@@ -13,9 +13,15 @@ class InactiveprojectsController < ApplicationController
 	
 	# Get the url parameter inactivFor
 	if params[:inactivFor]
-      begin; @inactivFor = params[:inactivFor]; rescue; end
+      begin 
+		@inactivFor = params[:inactivFor].to_i
+	  rescue 
+	    @inactivFor = 0;
+		Rails.logger.info "Exception: inactivFor wird auf 0 gesetzt. #{@inactivFor}"
+	  end
 	else
 	  @inactivFor = 0;
+	  Rails.logger.info "Kein Url Parameter: inactivFor wird auf 0 gesetzt. #{@inactivFor}"
     end
 	
 	Rails.logger.info "Inactiv For Variable ist: #{@inactivFor}"
@@ -29,7 +35,7 @@ class InactiveprojectsController < ApplicationController
                                                              :with_subprojects => @with_subprojects,
                                                              :author => @author)
 		
-    events = @activity.events(Date.today , Date.today + 1)
+    events = @activity.events(Date.today - @inactivFor , Date.today + 1)
 	
 	Rails.logger.info "Events: #{events}"
 	Rails.logger.info "Es sind #{events.length} Elemente im Array Events."
