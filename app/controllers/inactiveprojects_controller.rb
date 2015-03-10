@@ -1,12 +1,5 @@
 class InactiveprojectsController < ApplicationController
   layout 'admin'
-  #menu_item :projects, :only => :projects
-  #menu_item :plugins, :only => :plugins
-  #menu_item :info, :only => :info
-
-  before_filter :require_admin
-  helper :sort
-  include SortHelper
     
   def index
 	Rails.logger.info "The function index of InactiveprojectsController was called. Info for Frei"
@@ -52,9 +45,6 @@ class InactiveprojectsController < ApplicationController
 	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactivFor)}
 	
 	Rails.logger.info "Es sind #{@inactivprojects.length} Elemente nach dem Event Filter im Array Projekte."
-	
-	####
-    #render :action => "projects", :layout => false if request.xhr?	
   end
   
 end
