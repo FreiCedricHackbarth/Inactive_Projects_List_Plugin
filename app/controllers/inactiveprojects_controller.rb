@@ -37,7 +37,7 @@ class InactiveprojectsController < ApplicationController
 	end
 	
 	# Delete all projects which are updated in the timespan
-	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactivFor)}
+	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today + 1 - @inactivFor)}
 	
 	Rails.logger.info "There are #{@inactivprojects.length} elements in the inactivprojects array after filter."
   end
