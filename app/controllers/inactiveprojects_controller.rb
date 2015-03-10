@@ -54,7 +54,7 @@ class InactiveprojectsController < ApplicationController
 	Rails.logger.info "Es sind #{@inactivprojects.length} Elemente nach dem Event Filter im Array Projekte."
 	
 	####
-    render :action => "projects", :layout => false if request.xhr?	
+    #render :action => "projects", :layout => false if request.xhr?	
   end
   
 end
