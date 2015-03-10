@@ -1,3 +1,0 @@
-
-module InactiveprojectsHelper
-end
