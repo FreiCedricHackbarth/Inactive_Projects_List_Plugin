@@ -4,7 +4,7 @@
 <%= form_tag({}, :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 <label for='inactivFor'><%= l(:LabelInactivFor) %>:</label>
-<%= select_tag(:inactivFor, options_for_select([['0 '+l(:LabelDays), 0], ['2 '+l(:LabelDays), 2], ['3 '+l(:LabelDays), 3], ['5 '+l(:LabelDays), 5], ['14 '+l(:LabelDays), 14], ['3 '+l(:LabelMonths), 90], ['6 '+l(:LabelMonths), 180], ['9 '+l(:LabelMonths), 270], ['12 '+l(:LabelMonths), 360], ['15 '+l(:LabelMonths), 450], ['18 '+l(:LabelMonths), 540], ['21 '+l(:LabelMonths), 630], ['2 '+l(:LabelYears), 720]], selected: @inactivFor )) %>
+<%= select_tag(:inactivFor, options_for_select([['0 '+l(:LabelDays), 0], ['1 '+l(:LabelDay), 2], ['2 '+l(:LabelDays), 2], ['3 '+l(:LabelDays), 3], ['5 '+l(:LabelDays), 5], ['14 '+l(:LabelDays), 14], ['1 '+l(:LabelMonth), 90], ['3 '+l(:LabelMonths), 90], ['6 '+l(:LabelMonths), 180], ['9 '+l(:LabelMonths), 270], ['1 '+l(:LabelYear), 360], ['15 '+l(:LabelMonths), 450], ['18 '+l(:LabelMonths), 540], ['21 '+l(:LabelMonths), 630], ['2 '+l(:LabelYears), 720]], selected: @inactivFor )) %>
 <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
 
 </fieldset>
