@@ -7,11 +7,11 @@ class InactiveprojectsController < ApplicationController
       begin 
 		@inactivFor = params[:inactivFor].to_i
 	  rescue 
-	    @inactivFor = 0;
+	    @inactivFor = -1;
 		Rails.logger.info "Exception: inactivFor is set to default value: #{@inactivFor}"
 	  end
 	else
-	  @inactivFor = 0;
+	  @inactivFor = -1;
 	  Rails.logger.info "No Url Parameter available: inactivFor is set to default value: #{@inactivFor}"
     end
 					
@@ -24,7 +24,7 @@ class InactiveprojectsController < ApplicationController
                                                              :with_subprojects => @with_subprojects,
                                                              :author => @author)
 		
-    events = @activity.events(Date.today + 1 - @inactivFor , Date.today + 1)
+    events = @activity.events(Date.today - @inactivFor , Date.today + 1)
 	
 	Rails.logger.info "Projects: #{@inactivprojects}"
 	Rails.logger.info "There are #{events.length} elements in the events array."
@@ -45,7 +45,7 @@ class InactiveprojectsController < ApplicationController
 	end
 	
 	# Delete all projects which are updated in the timespan
-	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today + 1 - @inactivFor)}
+	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactivFor)}
 	
 	Rails.logger.info "There are #{@inactivprojects.length} elements in the inactivprojects array after filter."
   end

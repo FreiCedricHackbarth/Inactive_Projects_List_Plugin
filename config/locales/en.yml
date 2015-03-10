@@ -3,6 +3,7 @@ en:
   #my_label: "My label in english"
   LabelInactiveProjects: "Inactive Projects"
   LabelInactivFor: "inactive for"
+  LabelNoFilter: "No filter"
   LabelDay: "day"
   LabelDays: "days"
   LabelMonth: "month"

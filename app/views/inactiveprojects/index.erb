@@ -5,7 +5,7 @@
 		<legend><%= l(:label_filter_plural) %></legend>
 		<label for='inactivFor'><%= l(:LabelInactivFor) %>:</label>
 		<%= select_tag(:inactivFor, options_for_select([
-				['0 '+l(:LabelDays), 0], 
+				[l(:LabelNoFilter), -1],
 				['1 '+l(:LabelDay), 1], 
 				['2 '+l(:LabelDays), 2], 
 				['3 '+l(:LabelDays), 3], 
