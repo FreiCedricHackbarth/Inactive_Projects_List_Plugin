@@ -49,7 +49,7 @@ class InactiveprojectsController < ApplicationController
 	end
 	
 	# Delete all projects which are updated in the timespan
-	#@inactivprojects.delete_if{|obj|obj.updated == item.project_id}
+	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactivFor)}
 	
 	Rails.logger.info "Es sind #{@inactivprojects.length} Elemente nach dem Event Filter im Array Projekte."
 	
