@@ -1,41 +1,53 @@
 <%= title l(:LabelInactiveProjects) %>
-<h2> Hier die View fuer die inaktiven Projekte </h2>
 
 <%= form_tag({}, :method => :get) do %>
-<fieldset><legend><%= l(:label_filter_plural) %></legend>
-<label for='inactivFor'><%= l(:LabelInactivFor) %>:</label>
-<%= select_tag(:inactivFor, options_for_select([['0 '+l(:LabelDays), 0], ['1 '+l(:LabelDay), 1], ['2 '+l(:LabelDays), 2], ['3 '+l(:LabelDays), 3], ['5 '+l(:LabelDays), 5], ['14 '+l(:LabelDays), 14], ['1 '+l(:LabelMonth), 30], ['3 '+l(:LabelMonths), 90], ['6 '+l(:LabelMonths), 180], ['9 '+l(:LabelMonths), 270], ['1 '+l(:LabelYear), 360], ['15 '+l(:LabelMonths), 450], ['18 '+l(:LabelMonths), 540], ['21 '+l(:LabelMonths), 630], ['2 '+l(:LabelYears), 720]], selected: @inactivFor )) %>
-<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
-
-</fieldset>
+	<fieldset>
+		<legend><%= l(:label_filter_plural) %></legend>
+		<label for='inactivFor'><%= l(:LabelInactivFor) %>:</label>
+		<%= select_tag(:inactivFor, options_for_select([
+				['0 '+l(:LabelDays), 0], 
+				['1 '+l(:LabelDay), 1], 
+				['2 '+l(:LabelDays), 2], 
+				['3 '+l(:LabelDays), 3], 
+				['5 '+l(:LabelDays), 5], 
+				['14 '+l(:LabelDays), 14], 
+				['1 '+l(:LabelMonth), 30], 
+				['3 '+l(:LabelMonths), 90], 
+				['6 '+l(:LabelMonths), 180], 
+				['9 '+l(:LabelMonths), 270], 
+				['1 '+l(:LabelYear), 360], 
+				['15 '+l(:LabelMonths), 450], 
+				['18 '+l(:LabelMonths), 540], 
+				['21 '+l(:LabelMonths), 630], 
+				['2 '+l(:LabelYears), 720]], 
+				selected: @inactivFor )) %>
+		<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+	</fieldset>
 <% end %>
 &nbsp;
 
 <div class="autoscroll">
-<table class="list">
-  <thead><tr>
-  <th><%=l(:label_project)%></th>
-  <th><%=l(:field_created_on)%></th>
-  <th><%=l(:field_updated_on)%></th>
-  <th></th>
-  </tr></thead>
-  <tbody>
-<% project_tree(@inactivprojects) do |project, level| %>
-  <tr class="<%= cycle("odd", "even") %> <%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
-  <td class="name"><span><%= link_to_project_settings(project, {}, :title => project.short_description) %></span></td>
-  <td><%= format_date(project.created_on) %></td>
-  <td><%= format_date(project.updated_on) %></td>
-  <td class="buttons">
-    <%= link_to(l(:button_archive), { :controller => 'projects', :action => 'archive', :id => project, :status => params[:status] }, :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-lock') unless project.archived? %>
-    <%= link_to(l(:button_unarchive), { :controller => 'projects', :action => 'unarchive', :id => project, :status => params[:status] }, :method => :post, :class => 'icon icon-unlock') if project.archived? && (project.parent.nil? || !project.parent.archived?) %>
-  </td>
-  </tr>
-<% end %>
-  </tbody>
-</table>
+	<table class="list">
+	  <thead>
+		<tr>
+		  <th><%=l(:label_project)%></th>
+		  <th><%=l(:field_created_on)%></th>
+		  <th><%=l(:field_updated_on)%></th>
+		  <th></th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<% project_tree(@inactivprojects) do |project, level| %>
+		  <tr class="<%= cycle("odd", "even") %> <%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+			  <td class="name"><span><%= link_to_project_settings(project, {}, :title => project.short_description) %></span></td>
+			  <td><%= format_date(project.created_on) %></td>
+			  <td><%= format_date(project.updated_on) %></td>
+			  <td class="buttons">
+				<%= link_to(l(:button_archive), { :controller => 'projects', :action => 'archive', :id => project, :status => params[:status] }, :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-lock') unless project.archived? %>
+				<%= link_to(l(:button_unarchive), { :controller => 'projects', :action => 'unarchive', :id => project, :status => params[:status] }, :method => :post, :class => 'icon icon-unlock') if project.archived? && (project.parent.nil? || !project.parent.archived?) %>
+			  </td>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
 </div>
-
-<h2> Check Projects now </h2>
-<%if @projects.present?%>
-<h2> Projects is not null </h2>
-<%end%>
