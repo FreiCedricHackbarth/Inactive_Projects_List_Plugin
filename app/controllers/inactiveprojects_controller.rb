@@ -2,52 +2,44 @@ class InactiveprojectsController < ApplicationController
   layout 'admin'
     
   def index
-	# Get the url parameter inactivFor, if available
-	if params[:inactivFor]
+	# Get the url parameter inactiveFor, if available
+	if params[:inactiveFor]
       begin 
-		@inactivFor = params[:inactivFor].to_i
+		@inactiveFor = params[:inactiveFor].to_i
 	  rescue 
-	    @inactivFor = -1;
-		Rails.logger.info "Exception: inactivFor is set to default value: #{@inactivFor}"
+	    @inactiveFor = -1;
+		Rails.logger.info "Exception: inactiveFor is set to default value: #{@inactiveFor}"
 	  end
 	else
-	  @inactivFor = -1;
-	  Rails.logger.info "No Url Parameter available: inactivFor is set to default value: #{@inactivFor}"
+	  @inactiveFor = -1;
+	  Rails.logger.info "No Url Parameter available: inactiveFor is set to default value: #{@inactiveFor}"
     end
 					
 	# Get all projects
     scope = Project.sorted
-    @inactivprojects = scope.to_a
+    @inactiveprojects = scope.to_a
 	
 	# Get all events in the desired timespan	
 	@activity = Redmine::Activity::Fetcher.new(User.current, :project => @project,
                                                              :with_subprojects => @with_subprojects,
                                                              :author => @author)
 		
-    events = @activity.events(Date.today - @inactivFor , Date.today + 1)
+    events = @activity.events(Date.today - @inactiveFor , Date.today + 1)
 	
-	Rails.logger.info "Projects: #{@inactivprojects}"
+	Rails.logger.info "Projects: #{@inactiveprojects}"
 	Rails.logger.info "There are #{events.length} elements in the events array."
 	Rails.logger.info "Events: #{events}"
-	Rails.logger.info "There are #{@inactivprojects.length} elements in the inactivprojects array before filter."
+	Rails.logger.info "There are #{@inactiveprojects.length} elements in the inactiveprojects array before filter."
 	
 	# Delete the project of each event in the timespan
 	events.each do |item|
-		@inactivprojects.delete_if{|obj|obj.id == item.project.id}
-				
-		#if item.has_attribute?("project_id}")
-		#	@inactivprojects.delete_if{|obj|obj.id == item.project_id}
-		#elsif item.has_attribute?("journalized_id")
-		#	@inactivprojects.delete_if{|obj|obj.id == item.journalized.project_id}
-		#else
-		#	Rails.logger.info "GenerischeLoesung: #{item.project}"
-		#end
+		@inactiveprojects.delete_if{|obj|obj.id == item.project.id}
 	end
 	
 	# Delete all projects which are updated in the timespan
-	@inactivprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactivFor)}
+	@inactiveprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactiveFor)}
 	
-	Rails.logger.info "There are #{@inactivprojects.length} elements in the inactivprojects array after filter."
+	Rails.logger.info "There are #{@inactiveprojects.length} elements in the inactiveprojects array after filter."
   end
   
 end
