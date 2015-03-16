@@ -64,4 +64,54 @@ class InactiveprojectsController < ApplicationController
 		
 	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array after filter."
   end
+  
+  def archive	
+	# Get the projectId from the url parameter
+	projectId = params[:projectId].to_i
+	
+	# Initialize the message for redirect_to
+	message = "The project #{projectId} could not be found."
+			
+	# Get Projects
+	projectList = Project.sorted.to_a
+	
+	# Search the project with the id
+	projectList.each do |item|
+		if item.id == projectId
+			# archive the project
+			unless item.archive
+				flash[:error] = l(:error_can_not_archive_project)
+			end
+			message = "The project #{item} was archived."
+		end
+	end
+	
+	redirect_to({ :action=>'index' }, :alert => message)
+  end
+
+  def unarchive
+  	# Get the projectId from the url parameter
+	projectId = params[:projectId].to_i
+	
+	# Initialize the message for redirect_to
+	message = "The project #{projectId} could not be found."
+			
+	# Get Projects
+	projectList = Project.sorted.to_a
+	
+	# Search the project with the id
+	projectList.each do |item|
+		if item.id == projectId
+			# unarchive the project
+			unless item.unarchive
+				flash[:error] = l(:error_can_not_archive_project)
+			end
+			message = "The project #{item} was unarchived."
+		end
+	end
+	
+	redirect_to({ :action=>'index' }, :alert => message)
+  end
+
 end
+
