@@ -8,11 +8,11 @@ class InactiveprojectsController < ApplicationController
 		@inactiveFor = params[:inactiveFor].to_i
 	  rescue 
 	    @inactiveFor = -1;
-		Rails.logger.error "Exception: inactiveFor is set to default value: #{@inactiveFor}"
+		Rails.logger.error "Exception: the url parameter [inactiveFor] could not converted to integer. The value is set to default: #{@inactiveFor}"
 	  end
 	else
 	  @inactiveFor = -1;
-	  Rails.logger.debug "No Url Parameter available: inactiveFor is set to default value: #{@inactiveFor}"
+	  Rails.logger.debug "No Url Parameter [inactiveFor] available: The value is set to default value: #{@inactiveFor}"
     end
 					
 	# Get all projects
