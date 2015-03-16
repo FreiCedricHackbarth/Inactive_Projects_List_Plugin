@@ -8,11 +8,11 @@ class InactiveprojectsController < ApplicationController
 		@inactiveFor = params[:inactiveFor].to_i
 	  rescue 
 	    @inactiveFor = -1;
-		Rails.logger.info "Exception: inactiveFor is set to default value: #{@inactiveFor}"
+		Rails.logger.error "Exception: inactiveFor is set to default value: #{@inactiveFor}"
 	  end
 	else
 	  @inactiveFor = -1;
-	  Rails.logger.info "No Url Parameter available: inactiveFor is set to default value: #{@inactiveFor}"
+	  Rails.logger.debug "No Url Parameter available: inactiveFor is set to default value: #{@inactiveFor}"
     end
 					
 	# Get all projects
@@ -26,10 +26,10 @@ class InactiveprojectsController < ApplicationController
 		
     events = @activity.events(Date.today - @inactiveFor , Date.today + 1)
 	
-	Rails.logger.info "Projects: #{@inactiveprojects}"
-	Rails.logger.info "There are #{events.length} elements in the events array."
-	Rails.logger.info "Events: #{events}"
-	Rails.logger.info "There are #{@inactiveprojects.length} elements in the inactiveprojects array before filter."
+	Rails.logger.debug "Projects: #{@inactiveprojects}"
+	Rails.logger.debug "There are #{events.length} elements in the events array."
+	Rails.logger.debug "Events: #{events}"
+	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactiveprojects array before filter."
 	
 	# Delete the project of each event in the timespan
 	events.each do |item|
@@ -39,7 +39,7 @@ class InactiveprojectsController < ApplicationController
 	# Delete all projects which are updated in the timespan
 	@inactiveprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactiveFor)}
 	
-	Rails.logger.info "There are #{@inactiveprojects.length} elements in the inactiveprojects array after filter."
+	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactiveprojects array after filter."
   end
   
 end
