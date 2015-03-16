@@ -19,17 +19,20 @@ class InactiveprojectsController < ApplicationController
     scope = Project.sorted
     @inactiveprojects = scope.to_a
 	
+	# Create the timespan of interested
+	selectedTimespan = Date.today - @inactiveFor
+	
 	# Get all events in the desired timespan	
 	@activity = Redmine::Activity::Fetcher.new(User.current, :project => @project,
                                                              :with_subprojects => @with_subprojects,
                                                              :author => @author)
-		
-    events = @activity.events(Date.today - @inactiveFor , Date.today + 1)
+	
+    events = @activity.events(selectedTimespan , Date.today + 1)
 	
 	Rails.logger.debug "Projects: #{@inactiveprojects}"
 	Rails.logger.debug "There are #{events.length} elements in the events array."
 	Rails.logger.debug "Events: #{events}"
-	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactiveprojects array before filter."
+	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array before filter."
 	
 	# Delete the project of each event in the timespan
 	events.each do |item|
@@ -37,9 +40,9 @@ class InactiveprojectsController < ApplicationController
 	end
 	
 	# Delete all projects which are updated in the timespan
-	@inactiveprojects.delete_if{|obj|obj.updated_on > (Date.today - @inactiveFor)}
+	@inactiveprojects.delete_if{|obj|obj.updated_on > (selectedTimespan)}
 	
-	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactiveprojects array after filter."
+	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array after filter."
   end
   
 end
