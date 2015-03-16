@@ -1,6 +1,10 @@
 class InactiveprojectsController < ApplicationController
+  # Layout for the admin side menu
   layout 'admin'
-    
+  
+  # Helper to get the issues
+  include QueriesHelper
+      
   def index
 	# Get the url parameter inactiveFor, if available
 	if params[:inactiveFor]
@@ -19,6 +23,9 @@ class InactiveprojectsController < ApplicationController
     scope = Project.sorted
     @inactiveprojects = scope.to_a
 	
+	Rails.logger.debug "Projects: #{@inactiveprojects}"
+    Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array before filter."
+	
 	# Create the timespan of interested
 	selectedTimespan = Date.today - @inactiveFor
 	
@@ -29,11 +36,9 @@ class InactiveprojectsController < ApplicationController
 	
     events = @activity.events(selectedTimespan , Date.today + 1)
 	
-	Rails.logger.debug "Projects: #{@inactiveprojects}"
-	Rails.logger.debug "There are #{events.length} elements in the events array."
 	Rails.logger.debug "Events: #{events}"
-	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array before filter."
-	
+	Rails.logger.debug "There are #{events.length} elements in the events array."
+
 	# Delete the project of each event in the timespan
 	events.each do |item|
 		@inactiveprojects.delete_if{|obj|obj.id == item.project.id}
@@ -42,7 +47,21 @@ class InactiveprojectsController < ApplicationController
 	# Delete all projects which are updated in the timespan
 	@inactiveprojects.delete_if{|obj|obj.updated_on > (selectedTimespan)}
 	
+	# Get the issues and check the updated property of the issue is in the timespan.
+	retrieve_query
+	issuesList = @query.issues
+
+	Rails.logger.debug "Issues: #{issuesList}"
+	Rails.logger.debug "There are #{issuesList.length} elements in the issues array."
+	
+	# Delete the projects which had an issue which is updated in the timespan.	
+	issuesList.each do |item|
+		if item.updated_on > selectedTimespan
+			Rails.logger.debug "The Issue #{item.id} is updated in the timespan. The issue is in the project: #{item.project.id}"
+			@inactiveprojects.delete_if{|obj|obj.id == item.project.id}
+		end
+	end
+		
 	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array after filter."
   end
-  
 end
