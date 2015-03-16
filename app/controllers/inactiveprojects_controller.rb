@@ -65,7 +65,7 @@ class InactiveprojectsController < ApplicationController
 	Rails.logger.debug "There are #{@inactiveprojects.length} elements in the inactive projects array after filter."
   end
   
-  def archive	
+  def archiveProject	
 	# Get the projectId from the url parameter
 	projectId = params[:projectId].to_i
 	
@@ -89,7 +89,7 @@ class InactiveprojectsController < ApplicationController
 	redirect_to({ :action=>'index' }, :alert => message)
   end
 
-  def unarchive
+  def unarchiveProject
   	# Get the projectId from the url parameter
 	projectId = params[:projectId].to_i
 	

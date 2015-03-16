@@ -41,8 +41,8 @@
 			  <td class="name"><span><%= link_to_project_settings(project, {}, :title => project.short_description) %></span></td>
 			  <td><%= format_date(project.created_on) %></td>
 			  <td class="buttons">
-				<%= link_to(l(:button_archive), { :controller => 'inactiveprojects', :action => 'archive', :projectId => project.id}, :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-lock') unless project.archived? %>
-				<%= link_to(l(:button_unarchive), { :controller => 'inactiveprojects', :action => 'unarchive' , :projectId => project.id}, :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-unlock') if project.archived? && (project.parent.nil? || !project.parent.archived?) %>
+				<%= link_to(l(:button_archive), { :controller => 'inactiveprojects', :action => 'archiveProject', :projectId => project.id}, :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-lock') unless project.archived? %>
+				<%= link_to(l(:button_unarchive), { :controller => 'inactiveprojects', :action => 'unarchiveProject' , :projectId => project.id}, :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-unlock') if project.archived? && (project.parent.nil? || !project.parent.archived?) %>
 			  </td>
 		  </tr>
 		<% end %>
