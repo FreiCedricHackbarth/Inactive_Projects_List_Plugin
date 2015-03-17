@@ -10,3 +10,7 @@ en:
   LabelMonths: "months"
   LabelYear: "year"
   LabelYears: "years"
+  LabelTheProject: "Das Projekt"
+  LabelHasBeenArchived: "has been archived."
+  LabelHasBeenUnarchived: "has been reactivated."
+  LabelWasNotFound: "was not found."

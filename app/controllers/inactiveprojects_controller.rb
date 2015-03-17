@@ -70,7 +70,7 @@ class InactiveprojectsController < ApplicationController
 	projectId = params[:projectId].to_i
 	
 	# Initialize the message for redirect_to
-	message = "The project #{projectId} could not be found."
+	message = l(:LabelTheProject) + " #{projectId} " + l(:LabelWasNotFound)
 			
 	# Get Projects
 	projectList = Project.sorted.to_a
@@ -82,7 +82,7 @@ class InactiveprojectsController < ApplicationController
 			unless item.archive
 				flash[:error] = l(:error_can_not_archive_project)
 			end
-			message = "The project #{item} was archived."
+			message = l(:LabelTheProject) + " #{item} " + l(:LabelHasBeenArchived)
 		end
 	end
 	
@@ -94,7 +94,7 @@ class InactiveprojectsController < ApplicationController
 	projectId = params[:projectId].to_i
 	
 	# Initialize the message for redirect_to
-	message = "The project #{projectId} could not be found."
+	message = l(:LabelTheProject) + " #{projectId} " + l(:LabelWasNotFound)
 			
 	# Get Projects
 	projectList = Project.sorted.to_a
@@ -106,7 +106,7 @@ class InactiveprojectsController < ApplicationController
 			unless item.unarchive
 				flash[:error] = l(:error_can_not_archive_project)
 			end
-			message = "The project #{item} was unarchived."
+			message = l(:LabelTheProject) + " #{item} " + l(:LabelHasBeenUnarchived)
 		end
 	end
 	
