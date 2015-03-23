@@ -1,15 +1,14 @@
-* Redmine Inactive Projects List Plugin
-
+# Redmine Inactive Projects List Plugin
 Inactive_Projects_List_Plugin is a plugin for redmine 3.x . The plugin provides a list of all projects, which had no activity for a specific timespan.
 The plugin adds a new entry to the admin menu.
 
-* The repository is available on:
+# The repository is available on:
 https://github.com/FreiCedricHackbarth/Inactive_Projects_List_Plugin.git
 
-* Pre-condition:
-** Redmine Version 3.0.0 or higher
+# Pre-condition:
+* Redmine Version 3.0.0 or higher
 
-* Plugin installation
-1. Copy the plugin directory into the plugins directory.
-2. Restart redmine.
+# Plugin installation
+* Copy the plugin directory into the plugins directory (".\redmine\htdocs\plugins\")
+* Restart redmine.
 
