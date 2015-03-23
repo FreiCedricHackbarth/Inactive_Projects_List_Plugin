@@ -4,7 +4,7 @@ Inactive_Projects_List_Plugin is a plugin for redmine 3.x. The plugin provides a
 The plugin adds a new entry to the admin menu.
 
 
-=== The repository is available on:
+=== Repository:
 https://github.com/FreiCedricHackbarth/Inactive_Projects_List_Plugin.git
 
 
