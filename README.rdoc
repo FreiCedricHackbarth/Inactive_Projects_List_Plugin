@@ -14,8 +14,8 @@ https://github.com/FreiCedricHackbarth/Inactive_Projects_List_Plugin.git
 
 === Plugin installation:
 * Copy the plug-in directory into the plug-ins directory 
-(".\\redmine\\htdocs\\plugins\\")
+** (".\\redmine\\htdocs\\plugins\\")
 * Make sure, that the folder-name is similar to the plug-in name.  
-(".\\redmine\\htdocs\\plugins\\inactive_projects_list_plugin\\")
+** (".\\redmine\\htdocs\\plugins\\inactive_projects_list_plugin\\")
 * Restart redmine
 
